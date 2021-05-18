@@ -1,0 +1,46 @@
+.col-md-12 {
+	color: burlywood;
+    font-weight: bolder;
+	font-family: Garamond;
+	background-image: url("bacteria.jpg");
+    /* opacity: 0.70; */
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-left: 70px;
+
+}
+
+h1 {
+    font-weight: bold; 
+    text-align: center;  
+    background-color: #6495ED;
+}
+
+h3 {
+    font-weight: bold; 
+    text-align: center;  
+}
+
+#selectMetaPanel {
+	font-family:'Times New Roman', Times, serif;
+	background-color: 	#6495ED;
+	color: #f9f6bb;
+	letter-spacing: 2px;
+}
+
+#metaPanel .panel-header {
+	text-align: center;
+}
+
+#selDataset {
+	padding: 7px;
+	color: black;
+}
+
+#samplePanel {
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	text-align: center;
+	color: #ffe272;
+	background-color: #c6bfa5;
+}

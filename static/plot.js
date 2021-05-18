@@ -14,11 +14,11 @@ function buildMetaData(sampleId) {
        // - extract the metadata from the json
        // - filter the metadata for the sample id
        // - append hew header tags for each key-value pair in the filtered metadata
-        var result = data.metadata.filter(row => row.sampleId == sampleId)
-        Object.entries(result[0]).forEach(([key, value]) => {
-            showData.append("h6").text(`${key.toUpperCase()}: ${value}`)
-        })
-    })
+        var filteredArray = data.metadata.filter(row => row.sampleId == sampleId)
+        Object.entries(filteredArray[1]).forEach(([key, value]) => {
+            showData.append("p").text(`${key.toUpperCase()}: ${value}`);
+        });
+    });
 }
 
 
@@ -29,31 +29,39 @@ function buildBubbleChart(sampleId) {
     d3.json("samples.json").then((data) =>{
 
         // - extract the samples from the json
-        var samples = data.samples
+        var extractSamples = data.samples
 
         // - filter the samples for the sample id
         // - extract the ids, labels, and values from the filtered result
-        var resultArray = samples.filter(row => row.id == id)
-        var result = resultArray[0]
-        var otu_ids = result.otu_ids
-        var sample_values = result.sample_values
-        var otu_labels = result.otu_labels
+        var filteredArray = extractSamples.filter(row => row.sampleId == sampleId)
+        var selectedSample = filteredArray[1];
+
+        var ids = selectedSample.otu_ids
+        var values = selectedSample.sample_values
+        var labels = selectedSample.otu_labels
 
 
         var trace = [{
-            x: otu_ids,
-            y: sample_values,
+            x: ids,
+            y: values,
             mode: "markers",
-            text: otu_labels,
+            text: labels,
             marker: {
-                size: sample_values,
-                color: otu_ids,
+                size: values,
+                color: ids,
                 colorscale: "Portland",
                 sizeref: 1.5
             }
         }]
 
-        Plotly.newPlot("bubble", trace)
+        var layout = {
+            title: "Bacteria Cultures Per Sample",
+            hovermode: "closest",
+            xaxis: { title: "OTU ID" },
+            margin: { t: 0 },
+            margin: { t: 30}
+          };
+        Plotly.newPlot("bubble", trace, layout)
     }
     )
 
@@ -64,21 +72,21 @@ function buildBarChart(sampleId) {
     // - loop over the samples.json file
     d3.json("samples.json").then((data) =>{
         console.log(data)
-        var samples = data.samples
-        var resultArray = samples.filter(row => row.id == id)
-        var result = resultArray[0]
-        var otu_ids = result.otu_ids.map(id => "OTU" + id)
-        var otu_labels = result.otu_labels
-        var sample_values = result.sample_values
+        var extractSamples = data.samples
+        var filteredArray = extractSamples.filter(row => row.sampleId == sampleId)
+        var selectedSample = filteredArray[1]
+        var ids = selectedSample.otu_ids.map(id => "OTU" + id)
+        var labels = selectedSample.otu_labels
+        var values = selectedSample.sample_values
 
-        var otu_labels_10 = otu_labels.slice(0, 10)
-        var value_10 = sample_values.slice(0, 10)
+        var tenOTUlabels = labels.slice(0, 10)
+        var tenSamples = values.slice(0, 10)
 
 
         var trace = [{
-            x: value_10,
-            y: otu_ids,
-            text: otu_labels_10,
+            x: tenSamples,
+            y: ids,
+            text: tenOTUlabels,
             type: "bar",
             orientation: "h",
             marker: {
@@ -86,13 +94,13 @@ function buildBarChart(sampleId) {
             }
         }]
 
-        var bar_layout = {
-            title: "Top 10 microbial species (OTUs)"
-        }
-        Plotly.newPlot("bar", trace, bar_layout)
-        
-    }
-    )
+        var layout = {
+            title: "Top 10 Microbial Species (OTUs)",
+            margin: { t: 30, l: 150 }
+        };
+
+        Plotly.newPlot("bar", trace, layout);
+    });
 }
 
 
@@ -107,40 +115,40 @@ function init() {
 
         // - extract the first sample from the data
         var idNum = data.names;
-        idNum.forEach(id => {
-            selectDropdwn.append("option").text(id).property("value", id)
+        idNum.forEach(sampleId => {
+            selectDropdwn.append("option").text(sampleId).property("value", sampleId)
             
-        }
-        )
+        });
 
         // call two functions to build the metadata and build the charts on the first sample, 
         //so that new visitors see some data/charts before they select something from the dropdown
-        buildBarChart();
-        buildBubbleChart();
-        buildMetaData();
+        var chosenSample = idNum[1];
+        buildBarChart(chosenSample);
+        buildBubbleChart(chosenSample);
+        buildMetaData(chosenSample);
         
-    })
+    });
 }
 
 // Function that takes a new sample as an argument
 // This function when someone selects something on the dropdown
-function optionChanged() {
+function changeSampleId(newId) {
 
     d3.json("samples.json").then((data) =>{
         const selectMenu = d3.select("#selDataset");
         var id = selectMenu.property("value");
-        var index = data.names.indexOf(id)
+        var index = data.names.indexOf(newId)
 
         // build the metadata and the charts on a new sample
-        buildBarChart(id)
-        buildBubbleChart(id)
-        buildMetadata(id)
+        buildBarChart(newId)
+        buildBubbleChart(newId)
+        buildMetadata(newId)
         }
         )
         
     }
-    d3.select("#selDataset").on("change", IDchange);
+    d3.select("#selDataset").on("change", changeSampleId);
 }
 
 // Initialize the dashboard 
-init()
+init();

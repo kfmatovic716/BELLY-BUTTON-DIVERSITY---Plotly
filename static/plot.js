@@ -1,3 +1,4 @@
+let testdata;
 
 // Function that will build the metadata for a single sample
 function buildMetaData(sampleId) {
@@ -14,9 +15,9 @@ function buildMetaData(sampleId) {
        // - extract the metadata from the json
        // - filter the metadata for the sample id
        // - append hew header tags for each key-value pair in the filtered metadata
-        var filteredArray = data.metadata.filter(row => row.sampleId == sampleId)
-        Object.entries(filteredArray[1]).forEach(([key, value]) => {
-            showData.append("p").text(`${key.toUpperCase()}: ${value}`);
+        var filteredArray = data.metadata.filter(row => row.id == sampleId)
+        Object.entries(filteredArray[0]).forEach(([key, value]) => {
+            showData.append("h6").text(`${key.toUpperCase()}: ${value}`);
         });
     });
 }
@@ -33,8 +34,8 @@ function buildBubbleChart(sampleId) {
 
         // - filter the samples for the sample id
         // - extract the ids, labels, and values from the filtered result
-        var filteredArray = extractSamples.filter(row => row.sampleId == sampleId)
-        var selectedSample = filteredArray[1];
+        var filteredArray = extractSamples.filter(row => row.id == sampleId)
+        var selectedSample = filteredArray[0];
 
         var ids = selectedSample.otu_ids
         var values = selectedSample.sample_values
@@ -65,16 +66,17 @@ function buildBubbleChart(sampleId) {
     }
     )
 
-
+}
 // Function that will build a bar chart for a single sample
 function buildBarChart(sampleId) {
 
     // - loop over the samples.json file
     d3.json("samples.json").then((data) =>{
+        testdata = data
         console.log(data)
         var extractSamples = data.samples
-        var filteredArray = extractSamples.filter(row => row.sampleId == sampleId)
-        var selectedSample = filteredArray[1]
+        var filteredArray = extractSamples.filter(row => row.id == sampleId)
+        var selectedSample = filteredArray[0]
         var ids = selectedSample.otu_ids.map(id => "OTU" + id)
         var labels = selectedSample.otu_labels
         var values = selectedSample.sample_values
@@ -104,6 +106,7 @@ function buildBarChart(sampleId) {
 }
 
 
+
 // Function that will populate the charts/metadata and elements on the page
 function init() {
 
@@ -128,6 +131,7 @@ function init() {
         buildMetaData(chosenSample);
         
     });
+    d3.select("#selDataset").on("change", changeSampleId);
 }
 
 // Function that takes a new sample as an argument
@@ -143,11 +147,10 @@ function changeSampleId(newId) {
         buildBarChart(newId)
         buildBubbleChart(newId)
         buildMetadata(newId)
-        }
-        )
         
-    }
-    d3.select("#selDataset").on("change", changeSampleId);
+                
+    })
+    
 }
 
 // Initialize the dashboard 

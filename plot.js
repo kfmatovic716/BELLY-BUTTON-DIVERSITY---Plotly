@@ -1,8 +1,8 @@
-// let testdata;
+let testdata;
 
 // Function that will build the metadata for a single sample
 function buildMetaData(sampleId) {
-
+    console.log("Build metadata called")
     // select location in html to put the data in
     const demogPanel = d3.select("#sample-metadata");
 
@@ -16,7 +16,9 @@ function buildMetaData(sampleId) {
        // - filter the metadata for the sample id
        // - append hew header tags for each key-value pair in the filtered metadata
         var filteredArray = data.metadata.filter(row => row.id == sampleId)
-        Object.entries(data['metadata'][0]).forEach(([key, value]) => {
+        testdata=filteredArray
+        Object.entries(filteredArray[0]).forEach(([key, value]) => {
+            console.log(`${key.toUpperCase()}: ${value}`)
             demogPanel.append("h6").text(`${key.toUpperCase()}: ${value}`);
         })
     })
@@ -146,7 +148,7 @@ function changeSampleId() {
         // build the metadata and the charts on a new sample
         buildBarChart(sampleId);
         buildBubbleChart(sampleId);
-        buildMetadata(sampleId);
+        buildMetaData(sampleId);
     }
     )
 }

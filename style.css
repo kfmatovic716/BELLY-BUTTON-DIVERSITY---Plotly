@@ -1,8 +1,8 @@
 .col-md-12 {
-	color: burlywood;
+	color: #669999;
     font-weight: bolder;
 	font-family: Garamond;
-	background-image: url("bacteria.jpg");
+	background-image: url("petridish.jpg");
     /* opacity: 0.70; */
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -14,7 +14,7 @@
 h1 {
     font-weight: bold; 
     text-align: center;  
-    background-color: #6495ED;
+    /* background-color: #6495ED; */
 }
 
 h3 {
@@ -24,7 +24,7 @@ h3 {
 
 #selectMetaPanel {
 	font-family:'Times New Roman', Times, serif;
-	background-color: 	#6495ED;
+	background-color: #669999;
 	color: #f9f6bb;
 	letter-spacing: 2px;
 }

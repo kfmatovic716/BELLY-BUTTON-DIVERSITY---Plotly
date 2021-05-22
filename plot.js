@@ -1,13 +1,13 @@
-let testdata;
+// let testdata;
 
 // Function that will build the metadata for a single sample
 function buildMetaData(sampleId) {
 
     // select location in html to put the data in
-    const showData = d3.select("#sample-metadata");
+    const demogPanel = d3.select("#sample-metadata");
 
     //  clear any existing metadata in the metadata html elements
-    showData.html("")
+    demogPanel.html("")
 
     //  loop over the samples.json file 
     d3.json("samples.json").then((data) => {
@@ -16,10 +16,10 @@ function buildMetaData(sampleId) {
        // - filter the metadata for the sample id
        // - append hew header tags for each key-value pair in the filtered metadata
         var filteredArray = data.metadata.filter(row => row.id == sampleId)
-        Object.entries(filteredArray[0]).forEach(([key, value]) => {
-            showData.append("h6").text(`${key.toUpperCase()}: ${value}`);
-        });
-    });
+        Object.entries(data['metadata'][0]).forEach(([key, value]) => {
+            demogPanel.append("h6").text(`${key.toUpperCase()}: ${value}`);
+        })
+    })
 }
 
 
@@ -72,7 +72,7 @@ function buildBarChart(sampleId) {
 
     // - loop over the samples.json file
     d3.json("samples.json").then((data) =>{
-        testdata = data
+        // testdata = data
         console.log(data)
         var extractSamples = data.samples
         var filteredArray = extractSamples.filter(row => row.id == sampleId)
@@ -111,21 +111,21 @@ function buildBarChart(sampleId) {
 function init() {
 
     // - select the dropdown element in the page
-    var selectDropdwn = d3.select("#selDataset");
+    var selectDropdwn = d3.select("#selDataset")
 
     // - loop over the samples.json data to append the .name attribute into the value of an option HTML tag 
     d3.json("samples.json").then((data) =>{
 
         // - extract the first sample from the data
-        var idNum = data.names;
-        idNum.forEach(sampleId => {
-            selectDropdwn.append("option").text(sampleId).property("value", sampleId)
+        var idNum = data.names
+        idNum.forEach(id => {
+            selectDropdwn.append("option").text(id).property("value", id)
             
         });
 
         // call two functions to build the metadata and build the charts on the first sample, 
         //so that new visitors see some data/charts before they select something from the dropdown
-        var chosenSample = idNum[1];
+        var chosenSample = idNum[0];
         buildBarChart(chosenSample);
         buildBubbleChart(chosenSample);
         buildMetaData(chosenSample);
@@ -136,21 +136,19 @@ function init() {
 
 // Function that takes a new sample as an argument
 // This function when someone selects something on the dropdown
-function changeSampleId(newId) {
+function changeSampleId() {
 
     d3.json("samples.json").then((data) =>{
-        const selectMenu = d3.select("#selDataset");
-        var id = selectMenu.property("value");
-        var index = data.names.indexOf(newId)
+        const selectMenu = d3.select("#selDataset")
+        var sampleId = selectMenu.property("value")
+        var index = data.names.indexOf(sampleId)
 
         // build the metadata and the charts on a new sample
-        buildBarChart(newId)
-        buildBubbleChart(newId)
-        buildMetadata(newId)
-        
-                
-    })
-    
+        buildBarChart(sampleId);
+        buildBubbleChart(sampleId);
+        buildMetadata(sampleId);
+    }
+    )
 }
 
 // Initialize the dashboard 

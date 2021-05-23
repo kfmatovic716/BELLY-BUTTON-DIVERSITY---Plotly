@@ -1,5 +1,5 @@
 # BELLY-BUTTON-DIVERSITY - Dashboard with Interactive Visualization
-Website deployed via GitHub: https://kfmatovic716.github.io/BELLY-BUTTON-DIVERSITY---Plotly/ 
+
 
 #### Main Objectives
 <ul>
@@ -10,5 +10,6 @@ Website deployed via GitHub: https://kfmatovic716.github.io/BELLY-BUTTON-DIVERSI
     <li>Deploy dashboard site via Heroku (will do later)</li>
 </ul>
 <hr>
-![](https://github.com/kfmatovic716/BELLY-BUTTON-DIVERSITY---Plotly/blob/main/bar_demog.PNG?raw=true)
-![](https://github.com/kfmatovic716/BELLY-BUTTON-DIVERSITY---Plotly/blob/main/bubble.PNG?raw=true)
+![](https://github.com/kfmatovic716/BELLY-BUTTON-DIVERSITY---Plotly/blob/main/images/bar_demog.PNG?raw=true)
+<br>
+![](https://github.com/kfmatovic716/BELLY-BUTTON-DIVERSITY---Plotly/blob/main/images/bubble.PNG?raw=true)

@@ -169,7 +169,7 @@ function buildBarChart(sampleId) {
 //     let GAUGE = document.getElementById('gauge');
 //     Plotly.newPlot(GAUGE, data, layout);
 
-}
+// }
 
 // Function that will populate the charts/metadata and elements on the page
 function init() {

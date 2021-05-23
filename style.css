@@ -1,9 +1,8 @@
 .col-md-12 {
-	color: #669999;
+	color: green;
     font-weight: bolder;
 	font-family: Garamond;
 	background-image: url("petridish.jpg");
-    /* opacity: 0.70; */
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -14,7 +13,6 @@
 h1 {
     font-weight: bold; 
     text-align: center;  
-    /* background-color: #6495ED; */
 }
 
 h3 {
@@ -24,7 +22,7 @@ h3 {
 
 #selectMetaPanel {
 	font-family:'Times New Roman', Times, serif;
-	background-color: #669999;
+	background-color: green;
 	color: #f9f6bb;
 	letter-spacing: 2px;
 }

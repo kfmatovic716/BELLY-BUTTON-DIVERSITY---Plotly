@@ -1,8 +1,8 @@
-let testdata;
+
 
 // Function that will build the metadata for a single sample
 function buildMetaData(sampleId) {
-    console.log("Build metadata called")
+    
     // select location in html to put the data in
     const demogPanel = d3.select("#sample-metadata");
 
@@ -74,7 +74,7 @@ function buildBarChart(sampleId) {
 
     // - loop over the samples.json file
     d3.json("samples.json").then((data) =>{
-        // testdata = data
+        
         console.log(data)
         var extractSamples = data.samples
         var filteredArray = extractSamples.filter(row => row.id == sampleId)
@@ -107,7 +107,69 @@ function buildBarChart(sampleId) {
     });
 }
 
+// Function that will build gauge to visualize washing frequency
+// function buildGauge (washfreq) {
 
+//     let level = washfreq*20;
+
+//     let degrees = 180- level,
+//         radius = .5;
+//     let radians = degrees * Math.PI / 180;
+//     let x = radius * Math.cos(radians);
+//     let y = radius * Math.sin(radians);
+
+//     let mainPath = 'M -.0 -0.025 L .0 0.025 L ',
+//         pathX = String(x),
+//         space = ' ',
+//         pathY = String(y),
+//         pathEnd = ' Z';
+//     let path = mainPath.concat(pathX,space,pathY,pathEnd);
+
+//     let data = [{ type: 'scatter',
+//         x: [0], y:[0],
+//         marker: {size: 28, color:'850000'},
+//         showlegend: false,
+//         name: 'Frequency',
+//         text: washfreq,
+//         hoverinfo: 'text+name'
+//         },
+//         { values: [50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50],
+//         rotation: 90,
+//         text: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ''],
+//         textinfo: 'text',
+//         textposition:'inside',
+//         marker: {colors:['#a50026', '#d73027','#f46d43', '#fdae61','#fee08b', 
+//                         '#d9ef8b','#a6d96a', '#66bd63','#1a9850', '#006837']},
+//         labels: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1',''],
+//         hoverinfo: 'label',
+//         hole: .5,
+//         type: 'pie',
+//         showlegend: false
+//     }];
+
+//     let layout = {
+//         shapes:[{
+//         type: 'path',
+//         path: path,
+//         fillcolor: '850000',
+//         line: {
+//         color: '850000'
+//         }
+//         }],
+//         title: '<b>Belly Button Washing Frequency</b> <br> Scrubs per Week',
+//         titlefont: {family: 'Times New Roman, Times, serif'},
+//         height: 520,
+//         width: 520,
+//         xaxis: {zeroline:false, showticklabels:false,
+//              showgrid: false, range: [-1, 1]},
+//         yaxis: {zeroline:false, showticklabels:false,
+//              showgrid: false, range: [-1, 1]},
+//         };
+
+//     let GAUGE = document.getElementById('gauge');
+//     Plotly.newPlot(GAUGE, data, layout);
+
+}
 
 // Function that will populate the charts/metadata and elements on the page
 function init() {
@@ -149,6 +211,7 @@ function changeSampleId() {
         buildBarChart(sampleId);
         buildBubbleChart(sampleId);
         buildMetaData(sampleId);
+        
     }
     )
 }

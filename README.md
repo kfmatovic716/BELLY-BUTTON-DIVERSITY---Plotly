@@ -1,4 +1,4 @@
-# BELLY-BUTTON-DIVERSITY - Dashboard with Interactive Visualization
+# BELLY BUTTON DIVERSITY - Dashboard with Interactive Visualization
 
 
 #### Main Objectives

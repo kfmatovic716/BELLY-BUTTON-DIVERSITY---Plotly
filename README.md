@@ -11,9 +11,5 @@
 </ul>
 <hr>
 <img src="/images/bar_demog.PNG"/>
-<br>
-<<<<<<< HEAD
 <img src="/images/bubble.PNG"/>
-=======
-![](https://github.com/kfmatovic716/BELLY-BUTTON-DIVERSITY---Plotly/blob/main/images/bubble.PNG?raw=true)
->>>>>>> 2d2899b7a50b6b76fc168534d85b4de9008af6ef
+

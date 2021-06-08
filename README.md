@@ -1,4 +1,4 @@
-# BELLY-BUTTON-DIVERSITY - Dashboard with Interactive Visualization
+# BELLY BUTTON DIVERSITY - Dashboard with Interactive Visualization
 
 
 #### Main Objectives
@@ -10,6 +10,6 @@
     <li>Deploy dashboard site via Heroku (will do later)</li>
 </ul>
 <hr>
-![](https://github.com/kfmatovic716/BELLY-BUTTON-DIVERSITY---Plotly/blob/main/images/bar_demog.PNG?raw=true)
+<img src="/images/bar_demog.PNG"/>
 <br>
-![](https://github.com/kfmatovic716/BELLY-BUTTON-DIVERSITY---Plotly/blob/main/images/bubble.PNG?raw=true)
+<img src="/images/bubble.PNG"/>
